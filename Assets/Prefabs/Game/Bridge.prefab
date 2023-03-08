@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1547102528855380822}
   - component: {fileID: 3824067721996836133}
+  - component: {fileID: 8863016864581500616}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.32156864, g: 0.25490198, b: 0.29803923, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,6 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8863016864581500616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4297317061159211154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038da696665a7834a89cdcb0d1f30b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applyToAllChildren: 0
+  targetColor: 52414CFF
 --- !u!1 &4823396059330882488
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 662759321268936359}
   - component: {fileID: 1786488253521767251}
+  - component: {fileID: 1657894591118099442}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -159,7 +175,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.34901962, g: 0.38039216, b: 0.34117648, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -169,6 +185,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1657894591118099442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4823396059330882488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038da696665a7834a89cdcb0d1f30b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applyToAllChildren: 0
+  targetColor: 596157FF
 --- !u!1 &6726296887318245667
 GameObject:
   m_ObjectHideFlags: 0

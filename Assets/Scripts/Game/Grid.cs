@@ -54,6 +54,9 @@ public class Grid : MonoBehaviour
 
         //if we have spacee between the room, then place bridges there
         if (spaceBetween > 0) BuildBridges();
+        if (EventManager.instance != null)
+            EventManager.TriggerEvent("LevelLoadDone");
+
     }
 
     bool attemptCloseDoor(Room room, Vector2 targetDirection, GameObject door)

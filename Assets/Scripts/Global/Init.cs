@@ -2,22 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-
-
 public class Init : MonoBehaviour
 {
-
 
     //Mandatory scene that must be loaded
     List<string> MandatoryScenesToLoad = new List<string> { "SceneLoader", "AudioManager" };
 
     //Extra scenes to load depending on the need
     public List<string> ExtraScenesToLoad = new List<string>();
-
-
-
-
 
     // Start is called before the first frame update
     void Awake()
