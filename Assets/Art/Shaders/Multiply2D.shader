@@ -16,7 +16,7 @@ SubShader
         //AlphaTest Greater 0.5 //Only render pixels whose alpha is greater than AlphaValue.
         Stencil{
         Ref 2
-        Comp Always//Never - never pass the stencil test, Always - always pass the stencil test
+        Comp Greater//Never - never pass the stencil test, Always - always pass the stencil test
         Pass Replace //write Ref value into the stencil buufer
         }
 
