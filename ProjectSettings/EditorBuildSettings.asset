@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Game/Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Menu/MainMenu.unity
@@ -20,5 +20,20 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Global/SceneLoader.unity
     guid: 35ae0c7b76237462ba782accc040cc2a
+  - enabled: 1
+    path: Assets/Scenes/Game/Elevator.unity
+    guid: e83ec00e70d6fdb4f9f351fa41a553b0
+  - enabled: 1
+    path: Assets/Scenes/Game/GameManager.unity
+    guid: dd8536fd6eea10f438807ecc46c1eeed
+  - enabled: 1
+    path: Assets/Scenes/Game/MiniMap.unity
+    guid: c0a8402b6ac33eb4bb86ba59dced6aa8
+  - enabled: 1
+    path: Assets/Scenes/Game/GameplayUI.unity
+    guid: 11886613b7cdd7a4bbbad92c71fe98c4
+  - enabled: 1
+    path: Assets/Scenes/Global/Tools.unity
+    guid: aabc925b130916247976d7bf12cd2b3c
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

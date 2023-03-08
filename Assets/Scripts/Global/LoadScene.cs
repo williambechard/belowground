@@ -41,6 +41,7 @@ public class LoadScene : MonoBehaviour
 
     private void OnValidate()
     {
+        scenes = ReadNames();
         foreach (string name in scenes) allSceneNames.Add(name);
     }
 
