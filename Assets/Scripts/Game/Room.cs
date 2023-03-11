@@ -44,7 +44,6 @@ public class Room : MonoBehaviour
     public GameObject leftDoor;
     public GameObject rightDoor;
 
-
     public Vector2 size;
 
     public Vector2 pos;
@@ -52,13 +51,15 @@ public class Room : MonoBehaviour
     public int x;
     public int y;
 
-    public SpriteRenderer floor;
+    public SpriteRenderer floorSprite;
     public NodeState state;
+
+    public RoomMovement floorTiles;
+
 
     public void Start()
     {
-
-        floor.transform.localScale = size;
+        floorSprite.transform.localScale = size;
     }
 
     public void setupDoors()
@@ -103,19 +104,19 @@ public class Room : MonoBehaviour
         switch (state)
         {
             case NodeState.Available:
-                floor.color = Color.white;
+                floorSprite.color = Color.white;
                 break;
             case NodeState.Current:
-                floor.color = Color.yellow;
+                floorSprite.color = Color.yellow;
                 break;
             case NodeState.Completed:
-                floor.color = Color.blue;
+                floorSprite.color = Color.blue;
                 break;
             case NodeState.Start:
-                floor.color = Color.green;
+                floorSprite.color = Color.green;
                 break;
             case NodeState.Final:
-                floor.color = Color.red;
+                floorSprite.color = Color.red;
                 break;
         }
     }

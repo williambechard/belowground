@@ -35,5 +35,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Global/Tools.unity
     guid: aabc925b130916247976d7bf12cd2b3c
+  - enabled: 1
+    path: Assets/Scenes/Global/InputManager.unity
+    guid: 3fd62fe4267496d4593f29fbe3e8dd24
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
