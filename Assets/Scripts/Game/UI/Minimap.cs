@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Minimap : MonoBehaviour
 {
-    private Grid grid;
+    private MapGenerator map;
     public GameObject roomMapPREFAB;
     public GameObject bridgeMapPREFAB;
     public float betweenRoomSize;
@@ -16,7 +16,7 @@ public class Minimap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //betweenRoomSize = grid.spaceBetween;
     }
 
     void SetupListener()
@@ -62,10 +62,10 @@ public class Minimap : MonoBehaviour
         }
     }
 
-    void Handle_LevelSetup()
+    void Handle_LevelSetup(Dictionary<string, object> message)
     {
-        grid = FindFirstObjectByType<Grid>();
-        foreach (Room room in grid.AllRooms)
+        map = FindFirstObjectByType<MapGenerator>();
+        foreach (TileRoom room in map.AllRooms)
         {
             GameObject g = Instantiate<GameObject>(roomMapPREFAB);
 
@@ -79,15 +79,18 @@ public class Minimap : MonoBehaviour
 
         //set current room, which is room 0
 
-        foreach (GameObject bridge in grid.AllBridges)
+        foreach (GameObject bridge in map.AllBridges)
         {
             GameObject g = Instantiate<GameObject>(bridgeMapPREFAB);
-            g.transform.parent = mapClone.transform;
-            g.transform.localPosition = new Vector3(bridge.transform.position.x / (betweenRoomSize / 2.27f), bridge.transform.position.y / (betweenRoomSize / 2.27f), 1);
+            g.transform.SetParent(mapClone.transform);
+            Vector2 pos = bridge.GetComponent<Bridge>().pos;
+            g.transform.localPosition = new Vector2(pos.x * betweenRoomSize, pos.y * betweenRoomSize);
+            //g.transform.localPosition = new Vector3(bridge.transform.position.x / (betweenRoomSize / 2.27f), bridge.transform.position.y / (betweenRoomSize / 2.27f), 1);
             g.transform.localRotation = bridge.transform.localRotation;
         }
-        Debug.Log("grid captured" + grid);
+        Debug.Log("grid captured" + map);
         currentRoom = minimapRooms[0];
+
         StartCoroutine(blinkCurrentLocation());
     }
 

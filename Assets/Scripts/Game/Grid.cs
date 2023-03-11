@@ -8,7 +8,7 @@ public class Grid : MonoBehaviour
     //prefabs - for Room and the Bridge
     public Room RoomPrefab;
     public GameObject BridgePrefab;
-
+    public int level;
     //Adjustable properties
     public int targetNumberOfRooms;
     public float timeToWait;
@@ -20,6 +20,11 @@ public class Grid : MonoBehaviour
     public List<Room> OpenRooms = new(); //Any room that has at least 3 openings
     public List<GameObject> AllBridges = new(); //will store all the bridges that we create
 
+    public List<RoomMovement> StartRoom = new();
+    public List<RoomMovement> EndRoom = new();
+    public List<RoomMovement> RandomRoom = new();
+
+    public GameObject TileMapRoom;
 
 
     // Start is called before the first frame update
@@ -29,8 +34,9 @@ public class Grid : MonoBehaviour
     //Coroutine to allow us to see the map being built
     IEnumerator BuildRandomMap()
     {
+        level = 1;
         //create initial room 
-        spawnRoom(new Vector2(0, 0));
+        spawnRoom(new Vector2(0, 0), StartRoom[level - 1]);
         //and initial layout
         while (AllRooms.Count < targetNumberOfRooms)
         {
@@ -39,7 +45,9 @@ public class Grid : MonoBehaviour
                 int index = Random.Range(0, PossibleRooms.Count);
                 Vector2 newRoomPosition = PossibleRooms[index];
                 PossibleRooms.RemoveAt(index);
-                spawnRoom(newRoomPosition);
+                if (AllRooms.Count < targetNumberOfRooms)
+                    spawnRoom(newRoomPosition, RandomRoom[level - 1]);
+                else spawnRoom(newRoomPosition, EndRoom[level - 1]);
 
                 yield return new WaitForSeconds(timeToWait);
             }
@@ -53,9 +61,9 @@ public class Grid : MonoBehaviour
         closeExtra();
 
         //if we have spacee between the room, then place bridges there
-        if (spaceBetween > 0) BuildBridges();
+        BuildBridges();
         if (EventManager.instance != null)
-            EventManager.TriggerEvent("LevelLoadDone");
+            EventManager.TriggerEvent("LevelLoadDone", null);
 
     }
 
@@ -247,12 +255,14 @@ public class Grid : MonoBehaviour
         return canBuild;
     }
 
-    void createBridge(Vector2 pos, string id, string name)
+    void createBridge(Vector2 pos, string id, string name, Vector2 bridgePos)
     {
         GameObject b = Instantiate<GameObject>(BridgePrefab);
         b.transform.position = pos;
         if (name == "Top" || name == "Bottom")
             b.transform.eulerAngles = new Vector3(0, 0, 90);
+
+        b.GetComponent<Bridge>().pos = bridgePos;
 
         b.transform.localScale = new Vector3(spaceBetween, b.transform.localScale.y, 1);
 
@@ -263,36 +273,38 @@ public class Grid : MonoBehaviour
     }
     void BuildBridges()
     {
-        foreach (Room room in AllRooms)
-        {
-
-            Vector2 Top = (Vector2)room.transform.position + new Vector2(0, (room.size.y + spaceBetween) * .5f);
-            Vector2 Bottom = (Vector2)room.transform.position + new Vector2(0, -(room.size.y + spaceBetween) * .5f);
-            Vector2 Left = (Vector2)room.transform.position + new Vector2(-(room.size.x + spaceBetween) * .5f, 0);
-            Vector2 Right = (Vector2)room.transform.position + new Vector2((room.size.x + spaceBetween) * .5f, 0);
-
-            //how many doorways?
-            foreach (GameObject door in room.openDoors)
+        /*
+            foreach (TileRoom room in AllRooms)
             {
-                switch (door.name)
-                {
-                    case "Top":
-                        if (bridgePossible(Top)) createBridge(Top, room.name, door.name);
-                        break;
-                    case "Bottom":
-                        if (bridgePossible(Bottom)) createBridge(Bottom, room.name, door.name);
-                        break;
-                    case "Left":
-                        if (bridgePossible(Left)) createBridge(Left, room.name, door.name);
-                        break;
-                    case "Right":
-                        if (bridgePossible(Right)) createBridge(Right, room.name, door.name);
-                        break;
+
+                Vector2 Top = (Vector2)room.transform.position + new Vector2(0, (room.size.y + spaceBetween) * .5f);
+                Vector2 Bottom = (Vector2)room.transform.position + new Vector2(0, -(room.size.y + spaceBetween) * .5f);
+                Vector2 Left = (Vector2)room.transform.position + new Vector2(-(room.size.x + spaceBetween) * .5f, 0);
+                Vector2 Right = (Vector2)room.transform.position + new Vector2((room.size.x + spaceBetween) * .5f, 0);
+
+                //how many doorways?
+                for(int i =0; i < room.openDoors.Count; i++) {
+                    switch (i)
+                    {
+                        case 0:
+                            if (bridgePossible(Top)) createBridge(Top, room.name, door.name, new Vector2(room.x, room.y + .5f));
+                            break;
+                        case 2:
+                            if (bridgePossible(Bottom)) createBridge(Bottom, room.name, door.name, new Vector2(room.x, room.y - .5f));
+                            break;
+                        case 3:
+                            if (bridgePossible(Left)) createBridge(Left, room.name, door.name, new Vector2(room.x - .5f, room.y));
+                            break;
+                        case 1:
+                            if (bridgePossible(Right)) createBridge(Right, room.name, door.name, new Vector2(room.x + .5f, room.y));
+                            break;
+                    }
+
                 }
-            }
 
 
-        }
+
+            }*/
     }
 
     void closeExtra()
@@ -326,9 +338,9 @@ public class Grid : MonoBehaviour
 
     }
 
-    void spawnRoom(Vector2 pos)
+    void spawnRoom(Vector2 pos, RoomMovement floorPlan)
     {
-        Room r = Instantiate<Room>(RoomPrefab);
+        Room r = Instantiate<GameObject>(TileMapRoom).GetComponent<Room>(); //RoomPrefab
         r.transform.position = pos * new Vector2(r.size.x + spaceBetween, r.size.y + spaceBetween);
         r.pos = r.transform.position;
         r.setupDoors();
@@ -338,6 +350,14 @@ public class Grid : MonoBehaviour
         r.x = (int)pos.x;
         r.y = (int)pos.y;
         r.name = "[" + r.x + "," + r.y + "]";
+
+        //add floorPlan
+        /*
+        RoomMovement fPlan = Instantiate<RoomMovement>(floorPlan);
+        fPlan.transform.parent = r.transform;
+        fPlan.transform.localPosition = new Vector3(0, 0, 0);
+        r.floorTiles = fPlan;
+        */
         AllRooms.Add(r);
 
         Vector2 topPosition = new Vector2(r.x, r.y) + new Vector2(0, 1);

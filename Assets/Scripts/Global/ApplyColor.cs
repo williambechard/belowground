@@ -50,7 +50,6 @@ public class ApplyColor : MonoBehaviour
         Color newCol;
         ColorUtility.TryParseHtmlString('#' + targetColor, out newCol);
 
-        Debug.Log(img);
         if (img != null) img.color = newCol;
         if (sr != null) sr.color = newCol;
 

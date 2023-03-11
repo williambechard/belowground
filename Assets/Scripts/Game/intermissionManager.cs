@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class intermissionManager : MonoBehaviour
@@ -25,7 +26,7 @@ public class intermissionManager : MonoBehaviour
             EventManager.StopListening("LevelLoadDone", Handle_LevelSetup);
     }
 
-    void Handle_LevelSetup()
+    void Handle_LevelSetup(Dictionary<string, object> message)
     {
         Debug.Log("Level is dont setting up");
     }
