@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
     public bool isMoving = false;
     public float moveSpeed = 1.0f;
-    public Room playerRoom;
+    public TileRoom playerRoom;
 
     bool firstSpawn = true;
     bool freezePlayer = false;
@@ -15,20 +15,14 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         //get player camera and parent it to the player
-        GameObject g = GameObject.FindWithTag("PlayerCamera");
-        if (g != null)
-        {
-            playerRoom = transform.parent.GetComponentInParent<Room>();
-            g.transform.parent = playerRoom.transform;
-            g.transform.localPosition = new Vector3(0, 1.16f, -10);
-        }
+
 
         playerEnteredRoom();
     }
 
     public void playerEnteredRoom()
     {
-        playerRoom = transform.parent.GetComponentInParent<Room>();
+        playerRoom = transform.parent.GetComponentInParent<TileRoom>();
 
         if (!firstSpawn)
         {
@@ -99,7 +93,7 @@ public class PlayerController : MonoBehaviour
                 if (targetX > 0 && targetY > 0 && targetX < playerRoom.size.x && targetY < playerRoom.size.y)
                 {
                     //is it non solid? 
-                    if (playerRoom.floorTiles.f[playerRoom.floorTiles.ConvertPosTo1D(targetX, targetY)].GetComponent<FloorTile>().type != FloorTile.TileType.Solid)
+                    /*if (playerRoom.floorTiles.f[playerRoom.floorTiles.ConvertPosTo1D(targetX, targetY)].GetComponent<FloorTile>().type != FloorTile.TileType.Solid)
                     {
 
                         StartCoroutine(Move(move));
@@ -107,7 +101,7 @@ public class PlayerController : MonoBehaviour
                     else
                     {
                         //maybe a slight bounce animation
-                    }
+                    }*/
 
                 }
             }

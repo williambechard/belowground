@@ -120,67 +120,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &959145394
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 959145396}
-  - component: {fileID: 959145395}
-  m_Layer: 0
-  m_Name: Generator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &959145395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 959145394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afa4c26308f37f649974c0385f4a6b9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RoomPrefab: {fileID: 649946941075081894, guid: 18e425c95a963ac43b6ab8d2e96af874, type: 3}
-  BridgePrefab: {fileID: 6726296887318245667, guid: 4347d07b03971304c88c30df6dfa2cd8, type: 3}
-  level: 0
-  targetNumberOfRooms: 20
-  timeToWait: 0.01
-  spaceBetween: 1
-  AllRooms: []
-  PossibleRooms: []
-  OpenRooms: []
-  AllBridges: []
-  StartRoom:
-  - {fileID: 449390085149204980, guid: 07a9ba009ad434242b760a955debeba0, type: 3}
-  EndRoom:
-  - {fileID: 6101973272197337751, guid: 594f2ec3ddd71594f8192a9c9dc50a4a, type: 3}
-  RandomRoom:
-  - {fileID: 8612758201387351921, guid: 8160f0cf7ec84fd419d9bf9cb5c9a6a9, type: 3}
-  TileMapRoom: {fileID: 2170787128072933142, guid: c0bcafc63eb067a4b8290802c00fd62b, type: 3}
---- !u!4 &959145396
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 959145394}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1079556233
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +170,7 @@ MonoBehaviour:
   m_RefResolutionX: 256
   m_RefResolutionY: 224
   m_UpscaleRT: 0
-  m_PixelSnapping: 1
+  m_PixelSnapping: 0
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
@@ -282,7 +221,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 23
+    m_Bits: 87
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -302,7 +241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079556233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -343,7 +282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8581171893261718065, guid: 2a0d8d28d0c364c98b44181bd8875246, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8581171893261718065, guid: 2a0d8d28d0c364c98b44181bd8875246, type: 3}
       propertyPath: m_LocalPosition.x
@@ -408,7 +347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8346155939745508297, guid: cd11915828d7c7049940fdcb95bb8287, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8346155939745508297, guid: cd11915828d7c7049940fdcb95bb8287, type: 3}
       propertyPath: m_LocalPosition.x
@@ -465,6 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1925400183}
   - component: {fileID: 1925400184}
+  - component: {fileID: 1925400185}
   m_Layer: 0
   m_Name: GenerateRooms
   m_TagString: Untagged
@@ -480,12 +420,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925400181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: -3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1925400184
 MonoBehaviour:
@@ -515,6 +455,28 @@ MonoBehaviour:
   PossibleRooms: []
   OpenRooms: []
   AllBridges: []
-  StartRoom: []
-  EndRoom: []
-  RandomRoom: []
+  StartRoom:
+  - {fileID: 2170787128072933142, guid: 8c031749bf0967b44b6a20e5045707db, type: 3}
+  EndRoom:
+  - {fileID: 2170787128072933142, guid: 2508da8097522c445b8d749f7d74c59f, type: 3}
+  - {fileID: 2170787128072933142, guid: a6d0241fd7407be4794bd3cce1b4c66e, type: 3}
+  - {fileID: 2170787128072933142, guid: a43e3bc275673d54ea9f4190b67d30b7, type: 3}
+  RandomRoom:
+  - {fileID: 2170787128072933142, guid: 80410c72ea730c14893ad8a947cdc41c, type: 3}
+  - {fileID: 2170787128072933142, guid: 1f698088cb306354b9530b90632fad01, type: 3}
+  - {fileID: 2170787128072933142, guid: fdca3ef3f41b0494aa2b9bb517910b71, type: 3}
+  currentRoom: 0
+--- !u!114 &1925400185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925400181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ee37bdd1cfd7c844bcc1e4799e45281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameCamera: {fileID: 1079556237}
+  cameraMoveSpeed: 0.5

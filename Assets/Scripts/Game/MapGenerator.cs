@@ -28,13 +28,21 @@ public class MapGenerator : MonoBehaviour
     public List<TileRoom> OpenRooms = new(); //Any room that has at least 3 openings
     public List<GameObject> AllBridges = new(); //will store all the bridges that we create
 
-    public List<TileRoom> StartRoom = new();
-    public List<TileRoom> EndRoom = new();
-    public List<TileRoom> RandomRoom = new();
+    public List<GameObject> StartRoom = new();
+    public List<GameObject> EndRoom = new();
+    public List<GameObject> RandomRoom = new();
 
+    public int currentRoom;
 
-
-
+    public int GridToIndex(int x, int y)
+    {
+        for (int i = 0; i < AllRooms.Count; i++)
+        {
+            if (AllRooms[i].x == x && AllRooms[i].y == y)
+                return i;
+        }
+        return 0;
+    }
     // Start is called before the first frame update
     void Start() => StartCoroutine(BuildRandomMap());
 
@@ -42,6 +50,7 @@ public class MapGenerator : MonoBehaviour
     IEnumerator BuildRandomMap()
     {
         level = 1;
+        currentRoom = 0;
         //create initial room 
         spawnRoom(new Vector2(0, 0), RoomPrefab);
         //and initial layout
@@ -73,6 +82,7 @@ public class MapGenerator : MonoBehaviour
             int numOpen = 0;
             foreach (bool b in r.openDoors) if (b) numOpen++;
             GameObject roomBase;
+            Door[] doors = new Door[0];
             switch (numOpen)
             {
                 case 1:
@@ -88,6 +98,12 @@ public class MapGenerator : MonoBehaviour
 
                     if (openIndex != -1)
                     {
+                        doors = roomBase.GetComponentsInChildren<Door>();
+                        foreach (Door door in doors)
+                        {
+                            door.FacingDirection += openIndex;
+                            if (door.FacingDirection > 3) door.FacingDirection -= 4;
+                        }
                         roomBase.transform.eulerAngles = new Vector3(0, 0, -90 * openIndex);
                     }
                     roomBase.name = "1";
@@ -112,19 +128,32 @@ public class MapGenerator : MonoBehaviour
                         roomBase = Instantiate(roomBaseTwoOpenOpp);
                         roomBase.transform.parent = r.transform;
                         roomBase.transform.localPosition = new Vector3(0, 0, 0);
+                        doors = roomBase.GetComponentsInChildren<Door>();
+
 
                         if (Index1 + Index2 != 2)
+                        {
                             roomBase.transform.eulerAngles = new Vector3(0, 0, -90);
+                            foreach (Door door in doors)
+                                door.FacingDirection++;
+                        }
+
                     }
                     else
                     {
                         roomBase = Instantiate(roomBaseTwoOpen);
-
                         roomBase.transform.parent = r.transform;
                         roomBase.transform.localPosition = new Vector3(0, 0, 0);
                         int numRot = 0;
                         if (Index1 == 0 && Index2 == 3) numRot = 3;
                         else numRot = Index2 - 1;
+                        doors = roomBase.GetComponentsInChildren<Door>();
+                        foreach (Door door in doors)
+                        {
+                            door.FacingDirection += numRot;
+                            if (door.FacingDirection > 3) door.FacingDirection -= 4;
+
+                        }
                         roomBase.transform.eulerAngles = new Vector3(0, 0, -90 * numRot);
                         roomBase.name = "2 " + numRot;
 
@@ -156,7 +185,13 @@ public class MapGenerator : MonoBehaviour
                     }
                     else numTurns = 3;
                     roomBase.transform.eulerAngles = new Vector3(0, 0, -90 * numTurns);
+                    doors = roomBase.GetComponentsInChildren<Door>();
+                    foreach (Door door in doors)
+                    {
+                        door.FacingDirection += numTurns;
+                        if (door.FacingDirection > 3) door.FacingDirection -= 4;
 
+                    }
                     roomBase.name = "3";
 
                     break;
@@ -168,6 +203,14 @@ public class MapGenerator : MonoBehaviour
                     break;
             }
         }
+
+        //assign start room inner
+        GameObject sRoom = Instantiate(StartRoom[0]);
+        sRoom.transform.parent = AllRooms[0].transform;
+        sRoom.transform.localPosition = new Vector3(0, 0, 0);
+
+
+
 
         //if we have spacee between the room, then place bridges there
         BuildBridges();
@@ -470,6 +513,8 @@ public class MapGenerator : MonoBehaviour
         r.pos = r.transform.localPosition;
 
 
+
+
         //r.setupDoors();
         //r.setupWalls();
 
@@ -486,7 +531,21 @@ public class MapGenerator : MonoBehaviour
         r.floorTiles = fPlan;
         */
 
-
+        //if not beginning or end room add room
+        if (AllRooms.Count > 0 && AllRooms.Count < targetNumberOfRooms - 1)
+        {
+            int randomIndex = Random.Range(0, RandomRoom.Count);
+            GameObject roomInterior = Instantiate(RandomRoom[randomIndex]);
+            roomInterior.transform.parent = r.transform;
+            roomInterior.transform.localPosition = new Vector3(0, 0, 0);
+        }
+        else if (AllRooms.Count == targetNumberOfRooms - 1)
+        {
+            int randomIndex = Random.Range(0, EndRoom.Count);
+            GameObject roomInterior = Instantiate(EndRoom[randomIndex]);
+            roomInterior.transform.parent = r.transform;
+            roomInterior.transform.localPosition = new Vector3(0, 0, 0);
+        }
 
         AllRooms.Add(r);
 

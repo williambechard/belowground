@@ -600,7 +600,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92190af0458e774b83b03bb82dc593d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoorwayTiles: []
+  FacingDirection: 0
+  map: {fileID: 0}
 --- !u!1 &2132573284765185825 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8977236262743189706, guid: e2e2c6f6939e9864388296b2f5010376, type: 3}
@@ -618,7 +619,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92190af0458e774b83b03bb82dc593d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoorwayTiles: []
+  FacingDirection: 0
+  map: {fileID: 0}
 --- !u!212 &2566937348404819226 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4797027535682579185, guid: e2e2c6f6939e9864388296b2f5010376, type: 3}
@@ -694,7 +696,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92190af0458e774b83b03bb82dc593d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoorwayTiles: []
+  FacingDirection: 0
+  map: {fileID: 0}
 --- !u!1 &6877671472927341740 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4503464422602269511, guid: e2e2c6f6939e9864388296b2f5010376, type: 3}
@@ -732,4 +735,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92190af0458e774b83b03bb82dc593d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoorwayTiles: []
+  FacingDirection: 0
+  map: {fileID: 0}

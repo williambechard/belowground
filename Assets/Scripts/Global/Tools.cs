@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tools : MonoBehaviour
@@ -29,7 +28,10 @@ public class Tools : MonoBehaviour
     {
         // Write to disk
         StreamWriter writer = new StreamWriter("Assets/Resources/" + fileName + ".txt", false);
-        foreach (Color c in ColorSwatch) writer.WriteLine(c.ToHexString());
+        foreach (Color c in ColorSwatch)
+        {
+            writer.WriteLine(ColorUtility.ToHtmlStringRGB(c));
+        }
         writer.Close();
     }
 }
