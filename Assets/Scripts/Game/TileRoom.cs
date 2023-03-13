@@ -21,6 +21,12 @@ public class TileRoom : MonoBehaviour
 
     }
 
+    public void FreezeRoom()
+    {
+        //get all characters in room and set their state to frozen
+
+    }
+
     // Update is called once per frame
     void Update()
     {

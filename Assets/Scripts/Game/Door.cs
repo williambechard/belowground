@@ -3,52 +3,81 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    RoomMovement RM;
-    // Start is called before the first frame update
-    public List<Vector2> DoorwayTiles = new();
+    //0 = top
+    //1 = right
+    //2 = bottom
+    //3 = left
 
-    void Start()
+    public int FacingDirection;
+
+
+    public MapGenerator map;
+
+
+
+    private void Start()
     {
-
+        map = FindAnyObjectByType<MapGenerator>();
     }
 
-    private void OnEnable()
+
+    public Vector2 DirectionToVector()
     {
-        if (RM == null)
-            RM = transform.parent.transform.parent.GetComponentInChildren<RoomMovement>();
-
-
-
-        switch (name)
+        switch (FacingDirection)
         {
-            case "Top":
-                DoorwayTiles.Add(new Vector2(Mathf.CeilToInt(RM.size.x / 2), RM.size.y - 1));
-                DoorwayTiles.Add(new Vector2(Mathf.CeilToInt(RM.size.x / 2) - 1, RM.size.y - 1));
+            case 0:
+                return new Vector2(0, 1);
                 break;
-            case "Bottom":
-                DoorwayTiles.Add(new Vector2(Mathf.CeilToInt(RM.size.x / 2), 0));
-                DoorwayTiles.Add(new Vector2(Mathf.CeilToInt(RM.size.x / 2) - 1, 0));
+            case 1:
+                return new Vector2(1, 0);
                 break;
-            case "Left":
-                DoorwayTiles.Add(new Vector2(0, Mathf.CeilToInt(RM.size.y / 2)));
-                DoorwayTiles.Add(new Vector2(0, Mathf.CeilToInt(RM.size.y / 2) - 1));
+            case 2:
+                return new Vector2(0, -1);
                 break;
-            case "Right":
-                DoorwayTiles.Add(new Vector2(RM.size.x - 1, Mathf.CeilToInt(RM.size.y / 2)));
-                DoorwayTiles.Add(new Vector2(RM.size.x - 1, Mathf.CeilToInt(RM.size.y / 2) - 1));
+            case 3:
+                return new Vector2(-1, 0);
                 break;
         }
-
-        foreach (Vector2 v in DoorwayTiles)
-        {
-            RM.f[RM.ConvertPosTo1D((int)v.x, (int)v.y)].GetComponent<FloorTile>().type = FloorTile.TileType.Solid;
-        }
-
+        return new Vector2(0, 0);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
 
+        Player player = null;
+        if (collision.transform.parent != null)
+        {
+            player = collision.transform.parent.GetComponent<Player>();
+        }
+
+        if (player != null)
+        {
+            //only move if player not frozen
+            if (player.currentState != Character.state.Frozen)
+            {
+                //freeze player
+                player.currentState = Character.state.Frozen;
+
+                //move camera to new room
+                // then once done teleport player to new tile
+                if (EventManager.instance != null)
+                {
+                    Vector2 directionToMove = DirectionToVector();
+                    Debug.Log("directionToMove " + directionToMove);
+                    int x = map.AllRooms[map.currentRoom].x + (int)directionToMove.x;
+                    int y = map.AllRooms[map.currentRoom].y + (int)directionToMove.y;
+                    Debug.Log("New index = " + map.GridToIndex(x, y));
+                    map.currentRoom = map.GridToIndex(x, y);
+                    EventManager.TriggerEvent("CameraMove", new Dictionary<string, object> { { "value", (Vector2)map.AllRooms[map.GridToIndex(x, y)].transform.position },
+                    { "direction", directionToMove } });
+                }
+
+
+            }
+            Debug.Log("Player entered trigger ");
+        }
+
+
     }
+
 }
