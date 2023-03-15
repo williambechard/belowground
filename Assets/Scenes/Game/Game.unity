@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 1079556236}
   - component: {fileID: 1079556235}
   - component: {fileID: 1079556234}
+  - component: {fileID: 1079556239}
   m_Layer: 0
   m_Name: Camera
   m_TagString: PlayerCamera
@@ -153,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   applyToAllChildren: 0
-  targetColor: 52414CFF
+  targetColor: 52414C
 --- !u!114 &1079556235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +222,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 87
+    m_Bits: 71
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -248,6 +249,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1079556239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079556233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04d646df71ca142429ee41f2b05160db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.000010192394
+      value: 0.0000011324883
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.16249894
+      value: 0.023595842
+      inSlope: -0.14145967
+      outSlope: -0.14145967
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.96717614
+      value: 0.009455843
+      inSlope: -0.02725048
+      outSlope: -0.02725048
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.32001582
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  duration: 0.15
 --- !u!1001 &1434063689
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -405,6 +452,7 @@ GameObject:
   - component: {fileID: 1925400183}
   - component: {fileID: 1925400184}
   - component: {fileID: 1925400185}
+  - component: {fileID: 1925400186}
   m_Layer: 0
   m_Name: GenerateRooms
   m_TagString: Untagged
@@ -440,6 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomBase: []
+  keyFound: 0
   roomBaseOneOpen: {fileID: 2170787128072933142, guid: 0cb74e15997f1794baa8e55964ab677b, type: 3}
   roomBaseTwoOpen: {fileID: 2170787128072933142, guid: 4c04ec2fe2e98254b9008fc5867cd62e, type: 3}
   roomBaseTwoOpenOpp: {fileID: 2170787128072933142, guid: c0b9c764aa53cb2418249889886d0f7a, type: 3}
@@ -451,10 +500,19 @@ MonoBehaviour:
   targetNumberOfRooms: 10
   timeToWait: 0.01
   spaceBetween: 0
+  miniMap: {fileID: 0}
+  Text: {fileID: 0}
   AllRooms: []
   PossibleRooms: []
   OpenRooms: []
   AllBridges: []
+  allEnemies:
+  - {fileID: 5280636537558762715, guid: 167f791b154d13a488a0d5b74023f80d, type: 3}
+  - {fileID: 6167836621521207281, guid: 5fb6ddf529ae73e418b8030b0e9bf21b, type: 3}
+  - {fileID: 4272001448689861291, guid: 46044b4272cf6db479b02fa2d3c7e1b6, type: 3}
+  - {fileID: 5841203617538444748, guid: 09fb46a1ad0d2e74d942fd9fe1dcc7ae, type: 3}
+  allItems: []
+  KeyPREFAB: {fileID: 6234619644198588631, guid: db369bb107993694faf1e3e674e47bee, type: 3}
   StartRoom:
   - {fileID: 2170787128072933142, guid: 8c031749bf0967b44b6a20e5045707db, type: 3}
   EndRoom:
@@ -479,4 +537,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameCamera: {fileID: 1079556237}
-  cameraMoveSpeed: 0.5
+  cameraMoveSpeed: 0.25
+--- !u!114 &1925400186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925400181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91fa42502547b1a41a841942d6e31c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 1

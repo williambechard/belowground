@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 1223193600}
   - component: {fileID: 1223193602}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: MapPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   applyToAllChildren: 0
-  targetColor: 596157FF
+  targetColor: 596157
 --- !u!1 &1359088111
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 1359088115}
   - component: {fileID: 1359088116}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: InnerPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   applyToAllChildren: 0
-  targetColor: 52414CFF
+  targetColor: 52414C
 --- !u!1 &1858803441
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 1858803442}
   - component: {fileID: 1858803446}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MinimapCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

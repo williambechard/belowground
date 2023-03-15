@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Door : MonoBehaviour
 {
@@ -68,9 +69,21 @@ public class Door : MonoBehaviour
                     int y = map.AllRooms[map.currentRoom].y + (int)directionToMove.y;
                     Debug.Log("New index = " + map.GridToIndex(x, y));
                     map.currentRoom = map.GridToIndex(x, y);
+
+                    //set room to visited
+                    map.miniMap.minimapRooms[map.currentRoom].GetComponentInChildren<Image>().gameObject.SetActive(true);
+                    map.miniMap.mapClone.transform.localPosition += new Vector3(-directionToMove.x * 8, -directionToMove.y * 8, 0);
+                    //clear all minimap rooms so that if they were blinking they are now clear
+                    for (int i = 0; i < map.miniMap.minimapRooms.Count; i++)
+                    {
+                        map.miniMap.minimapRooms[i].GetComponent<Image>().color = Tools.Instance.ColorSwatch[1];
+                    }
+
+
                     EventManager.TriggerEvent("CameraMove", new Dictionary<string, object> { { "value", (Vector2)map.AllRooms[map.GridToIndex(x, y)].transform.position },
                     { "direction", directionToMove } });
                 }
+                else Debug.LogError("Event Manager.instance in null!");
 
 
             }

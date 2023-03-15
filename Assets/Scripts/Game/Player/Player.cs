@@ -17,6 +17,8 @@ public class Player : Character, IControllable
         weapon = GetComponent<FireBullet>();
     }
 
+
+
     void SetupListener()
     {
         EventManager.StartListening("PlayerMove", Handle_PlayerMove);
@@ -41,6 +43,7 @@ public class Player : Character, IControllable
     {
         if (currentState != state.Frozen)
         {
+            weapon.Strength = Strength;
             //fire projectile
             weapon.Fire(look.targetTransform.right);
         }
