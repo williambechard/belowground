@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
+
 
 public class MapGenerator : MonoBehaviour
 {
     //prefabs - for Room and the Bridge
     public List<GameObject> roomBase = new();
+
+    public bool keyFound = false;
 
 
     public GameObject roomBaseOneOpen;
@@ -22,11 +27,17 @@ public class MapGenerator : MonoBehaviour
     public float timeToWait;
     public float spaceBetween;
 
+    public Minimap miniMap;
+    public TextMeshProUGUI Text;
     //Lists that keep track of Rooms and room like things :)
     public List<TileRoom> AllRooms = new(); //All our created rooms exist here
     public List<Vector2> PossibleRooms = new(); //Store grid position of potential spaces that rooms could spawn
     public List<TileRoom> OpenRooms = new(); //Any room that has at least 3 openings
     public List<GameObject> AllBridges = new(); //will store all the bridges that we create
+
+    public List<GameObject> allEnemies = new();
+    public List<GameObject> allItems = new();
+    public GameObject KeyPREFAB;
 
     public List<GameObject> StartRoom = new();
     public List<GameObject> EndRoom = new();
@@ -44,7 +55,13 @@ public class MapGenerator : MonoBehaviour
         return 0;
     }
     // Start is called before the first frame update
-    void Start() => StartCoroutine(BuildRandomMap());
+    void Start()
+    {
+
+
+
+        StartCoroutine(BuildRandomMap());
+    }
 
     //Coroutine to allow us to see the map being built
     IEnumerator BuildRandomMap()
@@ -209,14 +226,35 @@ public class MapGenerator : MonoBehaviour
         sRoom.transform.parent = AllRooms[0].transform;
         sRoom.transform.localPosition = new Vector3(0, 0, 0);
 
+        //get all spawn points in current level
+        List<SpawnLocation> allSpawnLocations = GetComponentsInChildren<SpawnLocation>().ToList();
 
+        //create key
+        GameObject key = Instantiate(KeyPREFAB);
+        int keyIndex = Random.Range(0, allSpawnLocations.Count);
+        key.name = "Key";
+        key.transform.parent = allSpawnLocations[keyIndex].transform;
+        key.transform.localPosition = new Vector3(0, 0, 0);
+        allSpawnLocations.RemoveAt(keyIndex);
+
+        //create enemies
+        foreach (SpawnLocation location in allSpawnLocations)
+        {
+            //spawn random enemey or item
+            GameObject enemy = Instantiate(allEnemies[Random.Range(0, allEnemies.Count)]);
+            enemy.transform.parent = location.transform;
+            enemy.transform.localPosition = new Vector3(0, 0, 0);
+            enemy.transform.parent = location.transform.parent.transform;
+            Destroy(location.gameObject, .01f);
+        }
 
 
         //if we have spacee between the room, then place bridges there
         BuildBridges();
         if (EventManager.instance != null)
             EventManager.TriggerEvent("LevelLoadDone", null);
-
+        miniMap = FindObjectOfType<Minimap>();
+        Text.text = "Floor " + GameManager.instance.currentFloor.ToString();
     }
 
     bool attemptCloseDoor(TileRoom room, Vector2 targetDirection, int doorIndex)
@@ -505,6 +543,21 @@ public class MapGenerator : MonoBehaviour
     }
 
 
+    void addItems()
+    {
+
+    }
+
+    void addEnemies()
+    {
+
+    }
+
+    void addKey()
+    {
+
+    }
+
     void spawnRoom(Vector2 pos, TileRoom RoomPREFAB)
     {
         TileRoom r = Instantiate<TileRoom>(RoomPREFAB); //RoomPrefab
@@ -570,7 +623,38 @@ public class MapGenerator : MonoBehaviour
 
         if (AllRooms.FindIndex(i => i.x == leftPosition.x && i.y == leftPosition.y) < 0 && !PossibleRooms.Contains(leftPosition))
             PossibleRooms.Add(leftPosition);
+    }
+
+    void SetupListener()
+    {
+        EventManager.StartListening("Pickup", Handle_Pickup);
 
 
     }
+
+    private void OnEnable()
+    {
+        Invoke("SetupListener", .00001f);
+    }
+
+    private void OnDisable()
+    {
+        if (EventManager.instance != null)
+        {
+            EventManager.StopListening("Pickup", Handle_Pickup);
+
+
+        }
+    }
+
+
+    public void Handle_Pickup(Dictionary<string, object> message)
+    {
+        if ((string)message["value"] == "Key")
+        {
+            keyFound = true;
+        }
+
+    }
+
 }

@@ -1,5 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
 
 interface IMoveable
 {
@@ -17,11 +18,17 @@ interface IAttack
 }
 public class Character : MonoBehaviour, IMoveable, IDamageable, IAttack
 {
+    public GameObject hitEffect;
+    public GameObject dieEffect;
     public int Health;
     public int Strength;
     public float Speed;
+    public int MaxHealth;
 
     public state currentState = state.Awake;
+
+    public SpriteRenderer sr;
+    Color origColor;
 
     public bool isMoving = false;
     public Vector2 velocity;
@@ -30,6 +37,8 @@ public class Character : MonoBehaviour, IMoveable, IDamageable, IAttack
     private void Start()
     {
         rb = GetComponentInChildren<Rigidbody2D>();
+        sr = GetComponentInChildren<SpriteRenderer>();
+        origColor = sr.color;
     }
 
     public enum state
@@ -49,8 +58,96 @@ public class Character : MonoBehaviour, IMoveable, IDamageable, IAttack
 
     public void Damage(int amount)
     {
-        throw new System.NotImplementedException();
+
+        if (EventManager.instance != null)
+            EventManager.TriggerEvent("Hit", null);
+        Health -= amount;
+        Debug.Log("amount " + amount);
+        Debug.Log("health " + Health);
+
+        if (Health <= 0)
+        {
+            //DEAD
+            Debug.Log("DEAD");
+
+            GameObject d = Instantiate(dieEffect);
+
+
+            //if player
+            if (this.gameObject.GetComponent<Player>() != null)
+            {
+
+                StartCoroutine(PlayerDeath());
+                d.transform.position = this.GetComponentInChildren<SpriteRenderer>().transform.position;
+            }
+            else
+            {
+                d.transform.position = this.transform.position;
+                Destroy(this.gameObject);
+            }
+
+
+
+        }
+        else
+        {
+            currentState = state.Frozen;
+            GameObject h = Instantiate(hitEffect);
+            h.transform.position = this.transform.position;
+
+            //if player
+            if (this.gameObject.GetComponent<Player>() != null)
+            {
+
+
+                h.transform.position = this.GetComponentInChildren<SpriteRenderer>().transform.position;
+            }
+
+
+
+            StartCoroutine(onHit());
+
+        }
+
+        if (EventManager.instance != null)
+            EventManager.TriggerEvent("Health", new Dictionary<string, object> { { "value", amount }, { "target", this.gameObject } });
     }
+
+    IEnumerator PlayerDeath()
+    {
+        yield return new WaitForSeconds(.01f);
+        currentState = state.Frozen;
+        this.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        //save player data
+        yield return new WaitForSeconds(2);
+        LevelManager.Instance.LoadScene("Elevator");
+        LevelManager.Instance.UnloadScene("Game");
+    }
+
+    IEnumerator onHit()
+    {
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        if (sr == null)
+        {
+            sr = GetComponentInChildren<SpriteRenderer>();
+            origColor = sr.color;
+        }
+
+        //flash on and off red
+        int i = 0;
+        while (i < 5)
+        {
+            sr.color = Tools.Instance.ColorSwatch[4];
+            yield return new WaitForSeconds(.1f);
+            sr.color = origColor;
+            yield return new WaitForSeconds(.1f);
+            i++;
+        }
+
+        currentState = state.Awake;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+    }
+
     public void Move(Vector2 moveVector)
     {
 
@@ -64,15 +161,8 @@ public class Character : MonoBehaviour, IMoveable, IDamageable, IAttack
     private void FixedUpdate()
     {
 
-        if (currentState != state.Frozen)
-        {
-            rb.velocity = velocity * Speed;
-        }
-        else
-        {
-            rb.velocity = new Vector2(0, 0);
-        }
-
+        if (currentState != state.Frozen) rb.velocity = velocity * Speed;
+        else rb.velocity = new Vector2(0, 0);
 
     }
 

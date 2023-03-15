@@ -36,10 +36,8 @@ public class Minimap : MonoBehaviour
 
     public void changeRoom()
     {
-        currentRoom.GetComponent<Image>().color = Tools.Instance.ColorSwatch[2];
+        minimapRooms[map.currentRoom].GetComponent<Image>().color = Tools.Instance.ColorSwatch[1];
         //change to new room
-
-        currentRoom.GetComponent<Image>().color = Tools.Instance.ColorSwatch[3];
     }
 
     IEnumerator blinkCurrentLocation()
@@ -51,12 +49,13 @@ public class Minimap : MonoBehaviour
             if (blinkOn)
             {
                 blinkOn = false;
-                currentRoom.GetComponent<Image>().color = Tools.Instance.ColorSwatch[3];
+
+                minimapRooms[map.currentRoom].GetComponent<Image>().color = Tools.Instance.ColorSwatch[3];
             }
             else
             {
                 blinkOn = true;
-                currentRoom.GetComponent<Image>().color = Tools.Instance.ColorSwatch[1];
+                minimapRooms[map.currentRoom].GetComponent<Image>().color = Tools.Instance.ColorSwatch[1];
             }
             yield return new WaitForSeconds(.3f);
         }
