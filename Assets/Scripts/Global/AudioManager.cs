@@ -70,20 +70,23 @@ public class AudioManager : MonoBehaviour
     public void PlayMusic(string name)
     {
         AudioClip clip = getClip(musicClips, name);
-
+        Debug.Log("Clip " + clip);
         if (clip != null)
         {
-            this.musicSource.clip = clip;
-            this.musicSource.Play();
+            musicSource.clip = clip;
+            musicSource.Play();
+            Debug.Log("Playing " + name);
         }
         else Debug.Log("PlayMusic failed! " + name + " is not found in the musicClipsDict");
     }
 
     public void PlaySFXOneShot(string name)
     {
+        Debug.Log("Attempting to play " + name);
         AudioClip clip = getClip(sfxClips, name);
         if (clip != null)
         {
+            Debug.Log("now playing " + name);
             sfxSource.clip = clip;
             sfxSource.PlayOneShot(sfxSource.clip);
         }

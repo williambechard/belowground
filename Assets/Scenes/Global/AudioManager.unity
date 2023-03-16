@@ -67,9 +67,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -104,7 +101,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +114,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -280,7 +277,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -408,7 +405,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -536,15 +533,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85a274e866694001893740fbd93fc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicClips:
-  - {fileID: 8300000, guid: 9153cc096e6f3463597455c6252266fd, type: 3}
-  - {fileID: 8300000, guid: acd4d3753a7754e90a772541d92be272, type: 3}
-  sfxClips:
-  - {fileID: 8300000, guid: 14e9e9b1db5414bb69cd2f96c79a044f, type: 3}
-  ambientClips: []
   musicSource: {fileID: 1917988080}
   sfxSource: {fileID: 1785766469}
   ambientSource: {fileID: 1081020416}
+  musicClips:
+  - {fileID: 8300000, guid: 2929f05e73d308c4fbff3217d2220426, type: 3}
+  - {fileID: 8300000, guid: 67c4264ede7d3c8468b1770ac63e8add, type: 3}
+  - {fileID: 8300000, guid: 4c949cb8bd057de4bbd71a13e80c24e5, type: 3}
+  - {fileID: 8300000, guid: 1ddbe6e049ad02b40be5cf2e09a2a7c6, type: 3}
+  sfxClips:
+  - {fileID: 8300000, guid: 9c5f9a5c13e33154ab7b1b0116749d89, type: 3}
+  - {fileID: 8300000, guid: b9bb80114ee61c145a7a2e43d7ecc3ed, type: 3}
+  - {fileID: 8300000, guid: ed231e8377e9ca44eaf6dc4ae9382365, type: 3}
+  - {fileID: 8300000, guid: 5ef1e7ada2bc6f14e8c9356df5373e40, type: 3}
+  - {fileID: 8300000, guid: 9b091c3c518527f47a6b4a87869a6d48, type: 3}
+  - {fileID: 8300000, guid: 62bc9048c9f57554997bd4fb18543018, type: 3}
+  - {fileID: 8300000, guid: 14e9e9b1db5414bb69cd2f96c79a044f, type: 3}
+  - {fileID: 8300000, guid: 34369f791fad48c47b4066768feec289, type: 3}
+  - {fileID: 8300000, guid: df6bd475840a40d4492b3ccf53943355, type: 3}
+  ambientClips: []
 --- !u!4 &2046667964
 Transform:
   m_ObjectHideFlags: 0

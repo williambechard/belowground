@@ -4,6 +4,10 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager gameManager;
     public int currentFloor;
+    public int Health = 3;
+    public int Strength = 1;
+    public float Speed = 1.75f;
+    public float XP;
 
     public static GameManager instance
     {

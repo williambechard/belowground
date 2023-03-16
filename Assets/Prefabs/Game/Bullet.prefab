@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6703493675945693299}
   - component: {fileID: 6703436939042662898}
   - component: {fileID: 1539173696926684018}
+  - component: {fileID: 7069667405615336342}
+  - component: {fileID: 2338659903264472162}
   m_Layer: 6
   m_Name: Bullet
   m_TagString: Untagged
@@ -50,6 +52,8 @@ MonoBehaviour:
   Strength: 0
   Speed: 0
   velocity: {x: 0, y: 0}
+  HitSound: {fileID: 7069667405615336342}
+  missSound: {fileID: 2338659903264472162}
 --- !u!50 &6703436939042662898
 Rigidbody2D:
   serializedVersion: 4
@@ -113,6 +117,34 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.25
+--- !u!114 &7069667405615336342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5387381831043654926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd16c260bd5d94d69a9a60bc533735e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnWake: 0
+  SoundFXName: hitHurt
+--- !u!114 &2338659903264472162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5387381831043654926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd16c260bd5d94d69a9a60bc533735e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnWake: 0
+  SoundFXName: hitMiss
 --- !u!1 &7328441182009899342
 GameObject:
   m_ObjectHideFlags: 0

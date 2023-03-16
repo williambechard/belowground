@@ -355,7 +355,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 363582058}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_TargetAssemblyTypeName: LoadScene, ScriptAssembly
         m_MethodName: loadScene
         m_Mode: 1
         m_Arguments:
@@ -416,6 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd16c260bd5d94d69a9a60bc533735e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playOnWake: 0
   SoundFXName: ButtonPress
 --- !u!114 &363582058
 MonoBehaviour:
@@ -440,7 +441,8 @@ MonoBehaviour:
   - MiniMap
   - GameplayUI
   - Tools
-  sceneToLoad: OptionsMenu
+  - InputManager
+  sceneToLoad: Elevator
 --- !u!114 &363582059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,7 +545,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Options
+  m_text: 'Start
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -642,7 +646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6996897052379287935, guid: cd11915828d7c7049940fdcb95bb8287, type: 3}
       propertyPath: BackgroundMusic
-      value: MainMenu
+      value: the-dying-110458
       objectReference: {fileID: 0}
     - target: {fileID: 6996897052379287935, guid: cd11915828d7c7049940fdcb95bb8287, type: 3}
       propertyPath: backgroundMusic

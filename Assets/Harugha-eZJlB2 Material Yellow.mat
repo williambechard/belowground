@@ -46,5 +46,5 @@ Material:
     - _VertexOffsetY: 0
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _FaceColor: {r: 0.62396055, g: 0.637597, b: 0.23839766, a: 1}
+    - _FaceColor: {r: 0.9127699, g: 0.9339623, b: 0.39355636, a: 1}
   m_BuildTextureStacks: []

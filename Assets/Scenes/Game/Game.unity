@@ -182,7 +182,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079556233}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &1079556237
 Camera:
   m_ObjectHideFlags: 0
@@ -385,12 +385,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6996897052379287935, guid: cd11915828d7c7049940fdcb95bb8287, type: 3}
-      propertyPath: BackgroundMusic
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6996897052379287935, guid: cd11915828d7c7049940fdcb95bb8287, type: 3}
+      propertyPath: AmbientSound
       value: None
+      objectReference: {fileID: 0}
+    - target: {fileID: 6996897052379287935, guid: cd11915828d7c7049940fdcb95bb8287, type: 3}
+      propertyPath: BackgroundMusic
+      value: gaming-8bit-music-hyperloop-by-infraction-amp-alexi-action-124334
       objectReference: {fileID: 0}
     - target: {fileID: 7335798683016945985, guid: cd11915828d7c7049940fdcb95bb8287, type: 3}
       propertyPath: m_Name
       value: MusicPlayerSetup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335798683016945985, guid: cd11915828d7c7049940fdcb95bb8287, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8346155939745508297, guid: cd11915828d7c7049940fdcb95bb8287, type: 3}
       propertyPath: m_RootOrder
@@ -441,6 +453,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd11915828d7c7049940fdcb95bb8287, type: 3}
+--- !u!1 &1746405939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7335798683016945985, guid: cd11915828d7c7049940fdcb95bb8287, type: 3}
+  m_PrefabInstance: {fileID: 1746405938}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1925400181
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomBase: []
   keyFound: 0
+  MusicStart: {fileID: 1746405939}
   roomBaseOneOpen: {fileID: 2170787128072933142, guid: 0cb74e15997f1794baa8e55964ab677b, type: 3}
   roomBaseTwoOpen: {fileID: 2170787128072933142, guid: 4c04ec2fe2e98254b9008fc5867cd62e, type: 3}
   roomBaseTwoOpenOpp: {fileID: 2170787128072933142, guid: c0b9c764aa53cb2418249889886d0f7a, type: 3}

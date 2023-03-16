@@ -10,7 +10,7 @@ public class PlaySoundOneShot : MonoBehaviour
 
     //Define our text files that we will pull clip names from
     TextAsset sfxList = null;
-
+    public bool playOnWake = false;
     //Enables a drop down in Unity Editor for us to select the
     //  clip names from a list
     public static List<string> allSfxNames = new();
@@ -43,7 +43,13 @@ public class PlaySoundOneShot : MonoBehaviour
             updateOnce = false;
         }
     }
-
+    private void Start()
+    {
+        if (playOnWake)
+        {
+            playSound();
+        }
+    }
     public void playSound()
     {
         StartCoroutine(waitForAudio());

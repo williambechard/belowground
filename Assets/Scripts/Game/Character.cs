@@ -20,13 +20,16 @@ public class Character : MonoBehaviour, IMoveable, IDamageable, IAttack
 {
     public GameObject hitEffect;
     public GameObject dieEffect;
+
     public int Health;
     public int Strength;
     public float Speed;
     public int MaxHealth;
+    int maxStrength;
+    float maxSpeed;
 
     public state currentState = state.Awake;
-
+    public float XP;
     public SpriteRenderer sr;
     Color origColor;
 
@@ -39,8 +42,17 @@ public class Character : MonoBehaviour, IMoveable, IDamageable, IAttack
         rb = GetComponentInChildren<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
         origColor = sr.color;
+
+
+
     }
 
+    private void OnEnable()
+    {
+        MaxHealth = Health;
+        maxStrength = Strength;
+        maxSpeed = Speed;
+    }
     public enum state
     {
         Frozen,
@@ -77,6 +89,21 @@ public class Character : MonoBehaviour, IMoveable, IDamageable, IAttack
             if (this.gameObject.GetComponent<Player>() != null)
             {
 
+                //save player data
+
+                PlayerPrefs.SetInt("MaxHealth", MaxHealth);
+                PlayerPrefs.Save();
+
+                PlayerPrefs.SetInt("Strength", maxStrength);
+                PlayerPrefs.Save();
+
+                PlayerPrefs.SetFloat("Speed", maxSpeed);
+                PlayerPrefs.Save();
+
+                PlayerPrefs.SetFloat("XP", XP);
+                PlayerPrefs.Save();
+
+
                 StartCoroutine(PlayerDeath());
                 d.transform.position = this.GetComponentInChildren<SpriteRenderer>().transform.position;
             }
@@ -84,6 +111,9 @@ public class Character : MonoBehaviour, IMoveable, IDamageable, IAttack
             {
                 d.transform.position = this.transform.position;
                 Destroy(this.gameObject);
+
+                //give player xp
+                GameManager.instance.XP += .5f;
             }
 
 

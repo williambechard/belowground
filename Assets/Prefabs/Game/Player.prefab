@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 3698207407996767507}
   - component: {fileID: 794195104093524310}
   - component: {fileID: 6786915392168451480}
+  - component: {fileID: 4142795541498117718}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -85,7 +86,8 @@ MonoBehaviour:
   Strength: 1
   Speed: 2
   MaxHealth: 3
-  currentState: 5
+  currentState: 0
+  XP: 0
   sr: {fileID: 0}
   isMoving: 0
   velocity: {x: 0, y: 0}
@@ -123,6 +125,19 @@ MonoBehaviour:
   targetTransform: {fileID: 6125176392200963457}
   Speed: 20
   Strength: 0
+--- !u!114 &4142795541498117718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002175783081418379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd16c260bd5d94d69a9a60bc533735e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundFXName: Shoot
 --- !u!1 &1318310730125210793
 GameObject:
   m_ObjectHideFlags: 0

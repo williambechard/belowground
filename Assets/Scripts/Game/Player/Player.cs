@@ -11,10 +11,14 @@ public class Player : Character, IControllable
     public GameObject bulletPREFAB;
     public FireBullet weapon;
     public lookAt look;
+    PlaySoundOneShot FireSoundFX;
+
 
     private void Awake()
     {
         weapon = GetComponent<FireBullet>();
+        FireSoundFX = GetComponent<PlaySoundOneShot>();
+
     }
 
 
@@ -46,6 +50,7 @@ public class Player : Character, IControllable
             weapon.Strength = Strength;
             //fire projectile
             weapon.Fire(look.targetTransform.right);
+            FireSoundFX.playSound();
         }
     }
 

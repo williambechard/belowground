@@ -1,1 +1,9 @@
+blipSelect
+explosion
+hitHurt
+pickup
+Shoot
+Click
 ButtonPress
+hitMiss
+damage

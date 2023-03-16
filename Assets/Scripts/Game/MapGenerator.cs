@@ -12,6 +12,7 @@ public class MapGenerator : MonoBehaviour
 
     public bool keyFound = false;
 
+    public GameObject MusicStart;
 
     public GameObject roomBaseOneOpen;
     public GameObject roomBaseTwoOpen;

@@ -5,6 +5,8 @@ public class Bullet : MonoBehaviour
     public int Strength;
     public float Speed;
     public Vector2 velocity;
+    public PlaySoundOneShot HitSound;
+    public PlaySoundOneShot missSound;
     Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -27,14 +29,20 @@ public class Bullet : MonoBehaviour
     {
 
         MonoBehaviour[] list = collision.gameObject.GetComponents<MonoBehaviour>();
+        bool hit = false;
+
         foreach (MonoBehaviour mb in list)
         {
             if (mb is IDamageable)
             {
                 IDamageable breakable = (IDamageable)mb;
                 breakable.Damage(Strength);
+                HitSound.playSound();
+                hit = true;
             }
         }
+
+        if (!hit) missSound.playSound();
         Destroy(this.gameObject);
     }
 }
